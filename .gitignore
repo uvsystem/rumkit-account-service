@@ -58,3 +58,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 /target/
+/src/com/dbsys/rs/account/DbConnectionConfig.java
