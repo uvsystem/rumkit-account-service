@@ -78,6 +78,7 @@ public class TokenControllerTest {
 	
 	@Test
 	public void testCreate() throws Exception {
+		Thread.sleep(2000L);
 		this.mockMvc.perform(
 				post("/token")
 				.contentType(MediaType.APPLICATION_JSON)
