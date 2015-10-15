@@ -1,6 +1,6 @@
 package com.dbsys.rs.account.test.controller;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -18,13 +18,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.dbsys.rs.account.repository.OperatorRepository;
-import com.dbsys.rs.account.service.OperatorService;
+import com.dbsys.rs.account.repository.UnitRepository;
 import com.dbsys.rs.account.service.UnitService;
 import com.dbsys.rs.account.test.TestConfig;
-import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.lib.UnauthenticatedAccessException;
 import com.dbsys.rs.lib.entity.Unit;
-import com.dbsys.rs.lib.entity.Operator.Role;
 import com.dbsys.rs.lib.entity.Unit.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,7 +30,7 @@ import com.dbsys.rs.lib.entity.Unit.Type;
 @ContextConfiguration(classes = {TestConfig.class})
 @Transactional
 @TransactionConfiguration (defaultRollback = true)
-public class OperatorControllerTest {
+public class UnitControllerTest {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -41,77 +39,71 @@ public class OperatorControllerTest {
 	private long count;
 
 	@Autowired
-	private OperatorService operatorService;
-	@Autowired
 	private UnitService unitService;
 	@Autowired
-	private OperatorRepository operatorRepository;
-
-	private Operator operator;
+	private UnitRepository unitRepository;
+	
+	private Unit unit;
 	
 	@Before
-	public void setup() {
+	public void setup() throws UnauthenticatedAccessException {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 		
-		count = operatorRepository.count();
+		count = unitRepository.count();
 		
-		Unit unit = new Unit();
+		unit = new Unit();
 		unit.setNama("Unit");
 		unit.setBobot(1f);
 		unit.setTipe(Type.FARMASI);
-		unitService.save(unit);
+		unit = unitService.save(unit);
 		
-		operator = new Operator();
-		operator.setUnit(unit);
-		operator.setNama("Operator");
-		operator.setPassword("Password");
-		operator.setRole(Role.ADMIN);
-		operator.setUsername("Username");
-		operator = operatorService.save(operator);
-		
-		assertEquals(count + 1, operatorRepository.count());
+		assertEquals(count + 1, unitRepository.count());
 	}
-
+	
 	@Test
-	public void testTambahSuccess() throws Exception {
+	public void testSimpan() throws Exception {
 		this.mockMvc.perform(
-				post("/operator")
+				post("/unit")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content("{\"nama\": \"Operator 2\","
-						+ "\"password\": \"Password 2\","
-						+ "\"role\":\"ADMIN\","
-						+ "\"username\":\"Username 2\","
-						+ "\"unit\":{"
-						+ "\"id\": \"" + operator.getUnit().getId() + "\","
-						+ "\"nama\":\"" + operator.getUnit().getNama() + "\","
-						+ "\"bobot\": \"" + operator.getUnit().getBobot() + "\","
-						+ "\"tipe\":\"" + operator.getUnit().getTipe() + "\"}"
-						+ "}")
+				.content("{\"nama\": \"Unit 1\","
+						+ "\"bobot\": \"1\","
+						+ "\"tipe\": \"FARMASI\"}")
 						
 			)
 			.andExpect(jsonPath("$.tipe").value("ENTITY"))
 			.andExpect(jsonPath("$.message").value("Berhasil"));
 		
-		assertEquals(count + 2, operatorRepository.count());
-	}
-	
-	@Test
-	public void testGetAll() throws Exception {
-		this.mockMvc.perform(
-				get("/operator")
-				.contentType(MediaType.APPLICATION_JSON)
-			)
-			.andExpect(jsonPath("$.tipe").value("LIST"))
-			.andExpect(jsonPath("$.message").value("Berhasil"));
+		assertEquals(count + 2, unitRepository.count());
 	}
 
 	@Test
 	public void testDelete() throws Exception {
 		this.mockMvc.perform(
-				delete(String.format("/operator/%s", operator.getId()))
+				delete(String.format("/unit/%s", unit.getId()))
 				.contentType(MediaType.APPLICATION_JSON)
 			)
 			.andExpect(jsonPath("$.tipe").value("SUCCESS"))
+			.andExpect(jsonPath("$.message").value("Berhasil"));
+	}
+
+	@Test
+	public void testGet() throws Exception {
+		this.mockMvc.perform(
+				get(String.format("/unit/%s", unit.getId()))
+				.contentType(MediaType.APPLICATION_JSON)
+			)
+			.andExpect(jsonPath("$.tipe").value("ENTITY"))
+			.andExpect(jsonPath("$.model.tipe").value("FARMASI"))
+			.andExpect(jsonPath("$.message").value("Berhasil"));
+	}
+
+	@Test
+	public void testGetAll() throws Exception {
+		this.mockMvc.perform(
+				get("/unit")
+				.contentType(MediaType.APPLICATION_JSON)
+			)
+			.andExpect(jsonPath("$.tipe").value("LIST"))
 			.andExpect(jsonPath("$.message").value("Berhasil"));
 	}
 }

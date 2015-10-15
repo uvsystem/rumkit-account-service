@@ -21,12 +21,14 @@ import org.springframework.web.context.WebApplicationContext;
 import com.dbsys.rs.account.repository.TokenRepository;
 import com.dbsys.rs.account.service.OperatorService;
 import com.dbsys.rs.account.service.TokenService;
+import com.dbsys.rs.account.service.UnitService;
 import com.dbsys.rs.account.test.TestConfig;
 import com.dbsys.rs.lib.UnauthenticatedAccessException;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Token;
 import com.dbsys.rs.lib.entity.Unit;
 import com.dbsys.rs.lib.entity.Operator.Role;
+import com.dbsys.rs.lib.entity.Unit.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -47,6 +49,8 @@ public class TokenControllerTest {
 	@Autowired
 	private TokenService tokenService;
 	@Autowired
+	private UnitService unitService;
+	@Autowired
 	private TokenRepository tokenRepository;
 
 	private Operator operator;
@@ -61,6 +65,8 @@ public class TokenControllerTest {
 		Unit unit = new Unit();
 		unit.setNama("Unit");
 		unit.setBobot(1f);
+		unit.setTipe(Type.FARMASI);
+		unitService.save(unit);
 		
 		operator = new Operator();
 		operator.setUnit(unit);
