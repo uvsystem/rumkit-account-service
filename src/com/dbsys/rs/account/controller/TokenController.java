@@ -16,6 +16,7 @@ import com.dbsys.rs.lib.Credential;
 import com.dbsys.rs.lib.EntityRestMessage;
 import com.dbsys.rs.lib.RestMessage;
 import com.dbsys.rs.lib.entity.Token;
+import com.dbsys.rs.lib.entity.Unit;
 
 /**
  * Controller untuk meng-handle request pada url /token/**, 
@@ -68,6 +69,6 @@ public class TokenController {
 	@RequestMapping(method = RequestMethod.GET, value = "/test/test")
 	@ResponseBody
 	public RestMessage test() throws ApplicationException, PersistenceException {
-		return RestMessage.success();
+		return RestMessage.success(Unit.Type.UGD.toString());
 	}
 }

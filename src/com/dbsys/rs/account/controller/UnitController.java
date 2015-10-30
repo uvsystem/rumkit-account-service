@@ -53,10 +53,4 @@ public class UnitController {
 		List<Unit> list = unitService.getAll();
 		return ListEntityRestMessage.createListUnit(list);
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/test/test")
-	@ResponseBody
-	public RestMessage test() throws ApplicationException, PersistenceException {
-		return RestMessage.success();
-	}
 }
