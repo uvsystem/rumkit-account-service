@@ -25,7 +25,6 @@ import com.dbsys.rs.account.test.TestConfig;
 import com.dbsys.rs.lib.entity.Operator;
 import com.dbsys.rs.lib.entity.Unit;
 import com.dbsys.rs.lib.entity.Operator.Role;
-import com.dbsys.rs.lib.entity.Unit.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -58,7 +57,7 @@ public class OperatorControllerTest {
 		Unit unit = new Unit();
 		unit.setNama("Unit");
 		unit.setBobot(1f);
-		unit.setTipe(Type.FARMASI);
+		unit.setTipe(Unit.TipeUnit.APOTEK_FARMASI);
 		unitService.save(unit);
 		
 		operator = new Operator();
