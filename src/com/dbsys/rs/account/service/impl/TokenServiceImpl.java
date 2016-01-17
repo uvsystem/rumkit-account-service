@@ -40,6 +40,6 @@ public class TokenServiceImpl implements TokenService {
 	@Override
 	@Transactional(readOnly = false)
 	public void lock(String tokenString) {
-		tokenRepository.updateStatus(tokenString, StatusToken.LOCK);
+		tokenRepository.updateStatus(tokenString, StatusToken.KUNCI);
 	}
 }

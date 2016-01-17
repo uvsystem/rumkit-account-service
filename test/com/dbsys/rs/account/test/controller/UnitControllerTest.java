@@ -23,7 +23,6 @@ import com.dbsys.rs.account.service.UnitService;
 import com.dbsys.rs.account.test.TestConfig;
 import com.dbsys.rs.lib.UnauthenticatedAccessException;
 import com.dbsys.rs.lib.entity.Unit;
-import com.dbsys.rs.lib.entity.Unit.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -54,7 +53,7 @@ public class UnitControllerTest {
 		unit = new Unit();
 		unit.setNama("Unit");
 		unit.setBobot(1f);
-		unit.setTipe(Type.FARMASI);
+		unit.setTipe(Unit.TipeUnit.APOTEK_FARMASI);
 		unit = unitService.save(unit);
 		
 		assertEquals(count + 1, unitRepository.count());
@@ -67,8 +66,7 @@ public class UnitControllerTest {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\"nama\": \"Unit 1\","
 						+ "\"bobot\": \"1\","
-						+ "\"tipe\": \"FARMASI\"}")
-						
+						+ "\"tipe\": \"APOTEK_FARMASI\"}")
 			)
 			.andExpect(jsonPath("$.tipe").value("ENTITY"))
 			.andExpect(jsonPath("$.message").value("Berhasil"));
@@ -93,7 +91,7 @@ public class UnitControllerTest {
 				.contentType(MediaType.APPLICATION_JSON)
 			)
 			.andExpect(jsonPath("$.tipe").value("ENTITY"))
-			.andExpect(jsonPath("$.model.tipe").value("FARMASI"))
+			.andExpect(jsonPath("$.model.tipe").value("APOTEK_FARMASI"))
 			.andExpect(jsonPath("$.message").value("Berhasil"));
 	}
 
