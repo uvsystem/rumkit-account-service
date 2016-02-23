@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dbsys.rs.account.service.OperatorService;
-import com.dbsys.rs.lib.ApplicationException;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.ApplicationException;
+import com.dbsys.rs.EntityRestMessage;
+import com.dbsys.rs.ListEntityRestMessage;
+import com.dbsys.rs.RestMessage;
+import com.dbsys.rs.account.entity.Operator;
 
 @Controller
 @RequestMapping("/operator")
@@ -30,7 +30,7 @@ public class OperatorController {
 	@ResponseBody
 	public EntityRestMessage<Operator> save(@RequestBody Operator operator) throws ApplicationException, PersistenceException {
 		operator = operatorService.save(operator);
-		return EntityRestMessage.createOperator(operator);
+		return new EntityRestMessage<Operator>(operator);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -44,6 +44,6 @@ public class OperatorController {
 	@ResponseBody
 	public ListEntityRestMessage<Operator> getAll() throws ApplicationException, PersistenceException {
 		List<Operator> list = operatorService.getAll();
-		return ListEntityRestMessage.createListOperator(list);
+		return new ListEntityRestMessage<Operator>(list);
 	}
 }

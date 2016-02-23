@@ -1,7 +1,7 @@
 package com.dbsys.rs.account.service;
 
-import com.dbsys.rs.lib.UnauthenticatedAccessException;
-import com.dbsys.rs.lib.entity.Token;
+import com.dbsys.rs.UnauthenticatedAccessException;
+import com.dbsys.rs.account.entity.Token;
 
 /**
  * Kelas untuk mengelola token.

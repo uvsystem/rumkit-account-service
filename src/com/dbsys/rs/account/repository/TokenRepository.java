@@ -5,10 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.dbsys.rs.lib.entity.Token;
-import com.dbsys.rs.lib.entity.Token.StatusToken;
-
-public interface TokenRepository extends JpaRepository<Token, String> {
+public interface TokenRepository extends JpaRepository<com.dbsys.rs.account.entity.Token, String> {
 
 	/**
 	 * Kunci token.
@@ -18,6 +15,6 @@ public interface TokenRepository extends JpaRepository<Token, String> {
 	 */
 	@Modifying
 	@Query("UPDATE Token token SET token.status = :status WHERE token.kode = :kode")
-	void updateStatus(@Param("kode") String kode, @Param("status") StatusToken status);
+	void updateStatus(@Param("kode") String kode, @Param("status") com.dbsys.rs.account.entity.Token.StatusToken status);
 
 }

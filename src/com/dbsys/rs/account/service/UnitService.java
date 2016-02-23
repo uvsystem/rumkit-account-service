@@ -2,7 +2,7 @@ package com.dbsys.rs.account.service;
 
 import java.util.List;
 
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.account.entity.Unit;
 
 /**
  * Kelas untuk mengelola data unit.

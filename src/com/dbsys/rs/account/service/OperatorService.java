@@ -2,7 +2,7 @@ package com.dbsys.rs.account.service;
 
 import java.util.List;
 
-import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.account.entity.Operator;
 
 /**
  * Service untuk mengelola data operator.

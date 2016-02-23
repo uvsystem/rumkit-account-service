@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dbsys.rs.account.repository.OperatorRepository;
 import com.dbsys.rs.account.service.OperatorService;
-import com.dbsys.rs.lib.entity.Operator;
+import com.dbsys.rs.account.entity.Operator;
 
 @Service
 @Transactional(readOnly = true)

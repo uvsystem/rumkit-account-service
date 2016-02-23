@@ -26,12 +26,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author Deddy Christoper Kakunsi
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.dbsys.rs.account.repository", "com.dbsys.rs.security.repository"})
+@EnableJpaRepositories(basePackages = {
+	"com.dbsys.rs.account.repository",
+	"com.dbsys.rs.security.repository"
+})
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @ComponentScan({
 	"com.dbsys.rs.account.service",
-	"com.dbsys.rs.lib.interceptor"
+	"com.dbsys.rs.interceptor"
 })
 public class ApplicationConfig {
     
@@ -60,7 +63,7 @@ public class ApplicationConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
     	LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-    	entityManagerFactoryBean.setPackagesToScan(DbConnectionConfig.PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN);
+    	entityManagerFactoryBean.setPackagesToScan("com.dbsys.rs.account.entity", "com.dbsys.rs.security");
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProvider(persistenceProvider());
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());

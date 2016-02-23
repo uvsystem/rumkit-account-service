@@ -22,9 +22,9 @@ import com.dbsys.rs.account.repository.OperatorRepository;
 import com.dbsys.rs.account.service.OperatorService;
 import com.dbsys.rs.account.service.UnitService;
 import com.dbsys.rs.account.test.TestConfig;
-import com.dbsys.rs.lib.entity.Operator;
-import com.dbsys.rs.lib.entity.Unit;
-import com.dbsys.rs.lib.entity.Operator.Role;
+import com.dbsys.rs.account.entity.Operator;
+import com.dbsys.rs.account.entity.Unit;
+import com.dbsys.rs.account.entity.Operator.Role;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

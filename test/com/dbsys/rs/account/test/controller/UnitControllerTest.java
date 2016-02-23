@@ -21,8 +21,8 @@ import org.springframework.web.context.WebApplicationContext;
 import com.dbsys.rs.account.repository.UnitRepository;
 import com.dbsys.rs.account.service.UnitService;
 import com.dbsys.rs.account.test.TestConfig;
-import com.dbsys.rs.lib.UnauthenticatedAccessException;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.UnauthenticatedAccessException;
+import com.dbsys.rs.account.entity.Unit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

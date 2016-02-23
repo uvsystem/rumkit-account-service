@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dbsys.rs.account.service.TokenService;
-import com.dbsys.rs.lib.ApplicationException;
-import com.dbsys.rs.lib.Credential;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.entity.Token;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.ApplicationException;
+import com.dbsys.rs.account.Credential;
+import com.dbsys.rs.EntityRestMessage;
+import com.dbsys.rs.RestMessage;
+import com.dbsys.rs.account.entity.Token;
+import com.dbsys.rs.account.entity.Unit;
 
 /**
  * Controller untuk meng-handle request pada url /token/**, 
@@ -46,7 +46,7 @@ public class TokenController {
 	@ResponseBody
 	public EntityRestMessage<Token> create(@RequestBody Credential credential) throws ApplicationException, PersistenceException {
 		Token token = tokenService.create(credential.getUsername(), credential.getPassword());
-		return EntityRestMessage.createToken(token);
+		return new EntityRestMessage<Token>(token);
 	}
 
 	/**

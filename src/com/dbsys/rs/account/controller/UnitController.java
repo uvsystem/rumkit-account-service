@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dbsys.rs.account.service.UnitService;
-import com.dbsys.rs.lib.ApplicationException;
-import com.dbsys.rs.lib.EntityRestMessage;
-import com.dbsys.rs.lib.ListEntityRestMessage;
-import com.dbsys.rs.lib.RestMessage;
-import com.dbsys.rs.lib.entity.Unit;
+import com.dbsys.rs.ApplicationException;
+import com.dbsys.rs.EntityRestMessage;
+import com.dbsys.rs.ListEntityRestMessage;
+import com.dbsys.rs.RestMessage;
+import com.dbsys.rs.account.entity.Unit;
 
 @Controller
 @RequestMapping("/unit")
@@ -30,14 +30,14 @@ public class UnitController {
 	@ResponseBody
 	public EntityRestMessage<Unit> save(@RequestBody Unit unit) throws ApplicationException, PersistenceException {
 		unit = unitService.save(unit);
-		return EntityRestMessage.createUnit(unit);
+		return new EntityRestMessage<Unit>(unit);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	@ResponseBody
 	public EntityRestMessage<Unit> get(@PathVariable Long id) throws ApplicationException, PersistenceException {
 		Unit unit = unitService.get(id);
-		return EntityRestMessage.createUnit(unit);
+		return new EntityRestMessage<Unit>(unit);
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
@@ -51,6 +51,6 @@ public class UnitController {
 	@ResponseBody
 	public ListEntityRestMessage<Unit> getAll() throws ApplicationException, PersistenceException {
 		List<Unit> list = unitService.getAll();
-		return ListEntityRestMessage.createListUnit(list);
+		return new ListEntityRestMessage<Unit>(list);
 	}
 }
