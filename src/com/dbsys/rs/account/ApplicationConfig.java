@@ -63,7 +63,7 @@ public class ApplicationConfig {
     @Bean
     public EntityManagerFactory entityManagerFactory() {
     	LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-    	entityManagerFactoryBean.setPackagesToScan("com.dbsys.rs.account.entity", "com.dbsys.rs.security");
+    	entityManagerFactoryBean.setPackagesToScan("com.dbsys.rs.account.entity", "com.dbsys.rs.security.entity");
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPersistenceProvider(persistenceProvider());
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
