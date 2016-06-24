@@ -28,8 +28,8 @@
     <init-param>
       <param-name>cors.allowed.origins</param-name>
       <param-value>
-		  http://222.124.150.12/,
-		  http://localhost/
+		  http://222.124.150.12,
+		  http://localhost
 	</param-value>
     </init-param>
     <init-param>
